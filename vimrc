@@ -99,6 +99,21 @@ inoremap jj <Esc>
 inoremap jk <Esc>
 
 "=====================================================
+"" Multiple window settings
+"=====================================================
+set splitbelow
+set splitright
+
+" ctrl + l : left window
+" ctrl + h : right window
+" ctrl + k : upper window
+" ctrl + j : lower window
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+"=====================================================
 "" Tabs / Buffers settings
 "=====================================================
 tab sball
@@ -134,8 +149,8 @@ autocmd BufWinLeave *.py :TagbarClose
 "=====================================================
 let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$']     " Ignore files in NERDTree
 let NERDTreeWinSize=40
-autocmd VimEnter * if !argc() | NERDTree | endif  " Load NERDTree only if vim is run without arguments
-nmap " :NERDTreeToggle<CR>
+au vimenter * NERDTree " Set up NERDTree whenever vim is launched.
+map <F2> :NERDTreeToggle<CR> " Set F2 to be the key to toggle NERDTree.
 
 "=====================================================
 "" SnipMate settings
@@ -233,8 +248,17 @@ let g:syntastic_python_checkers=['flake8', 'pydocstyle', 'python']
 " YouCompleteMe
 set completeopt-=preview
 
+let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_global_ycm_extra_conf='~/.vim/ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf=0
 
 nmap <leader>g :YcmCompleter GoTo<CR>
 nmap <leader>d :YcmCompleter GoToDefinition<CR>
+
+" ctrlp
+let g:ctrlp_map = '<c-p>' 
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$' " Filter suffixes that we would like to ignore.
+
+" Share clipboard
+set clipboard=unnamed
